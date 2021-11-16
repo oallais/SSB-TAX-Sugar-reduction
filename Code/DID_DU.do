@@ -1,8 +1,6 @@
 clear all
 cap log close
-
-*global disk "E:"
-*global disk "C:\Users\mchampion"
+* Change directory and create subfolders Data and Results
 global disk "C:\Users\Admin\"
 global data "$disk\Dropbox\BMJ\Data"
 global code "$disk\Dropbox\BMJ\Code"
@@ -15,9 +13,10 @@ local l_placebo_1=3
 
 local nreps= 1000
  
+
 use "$data\BRSA2019.dta", clear 
 
-keep Country ProduitNuméro country codebarre EntrepriseSociété ultimatecompany companycountry marque produit year sucres Country PL categorie effectif shareofoutofpocket presence_edulcorants
+* keep Country year Id_SSB sucres Country PL categorie effectif shareofoutofpocket presence_edulcorants
 gen sweetener=cond(presence_edulcorants=="oui",1,0)
 drop if sucres==.
 
