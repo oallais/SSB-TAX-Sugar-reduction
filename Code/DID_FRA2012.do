@@ -1,11 +1,8 @@
 clear all
 cap log close
 
-*global disk "E:"
-*global disk "C:\Users\Olivier Allais"
-*global disk "C:\Users\mchampion"
+* Change directory and create subfolder Data and Results
 global disk "C:\Users\Admin\"
-
 global data "$disk\Dropbox\BMJ\Data"
 global code "$disk\Dropbox\BMJ\Code"
 global result "$disk\Dropbox\BMJ\Results"
@@ -26,7 +23,7 @@ local nreps= 1000
  
 use "$data\BRSA2019.dta", clear 
 
-keep Country ProduitNuméro country codebarre EntrepriseSociété ultimatecompany companycountry marque produit year sucres Country PL categorie effectif shareofoutofpocket presence_edulcorants
+keep Country year Id_SSB sucres Country PL categorie effectif shareofoutofpocket presence_edulcorants
 gen sweetener=cond(presence_edulcorants=="oui",1,0)
 drop if sucres==.
 drop if (categorie==3 & Country==4) /*Remove flavoured waters for Italy: Only 15 beverages; 1.25% of Italian SSBs*/
